@@ -16,9 +16,8 @@ to_currency = st.selectbox("To currency", to_currency_options)
 
 amount = st.number_input(
     label="Enter amount", 
-    step=1, 
-    max_value=9_007_199_254_740_991, 
-    value=f"{amount:.2f}"
+    step=0.01, 
+    max_value=9_007_199_254_740_991
 )
 if st.button("Check amount"):
     currency = Currency()
