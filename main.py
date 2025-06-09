@@ -14,12 +14,19 @@ to_currency_options = [curr for curr in ['USD', 'UAH', 'RUB'] if curr != from_cu
 
 to_currency = st.selectbox("To currency", to_currency_options)
 
-amount = st.number_input(min_value=None, label="Enter amount", step=1)
+amount = st.number_input(
+    label="Enter amount", step=1, max_value=9_007_199_254_740_991
+)
 if st.button("Check amount"):
     currency = Currency()
-    result = currency.convert(to_curr=to_currency, from_curr=from_currency, amount=amount)
+    clean_amount = abs(amount)
+    result = currency.convert(
+        to_curr=to_currency, 
+        from_curr=from_currency,
+        amount=clean_amount
+    )
+    print("DEBUG amount: ", clean_amount)
     if result is not None:
-        st.markdown(f"### 💰 {amount} {from_currency} = **{result:.2f} {to_currency}**")
+        st.markdown(f"### 💰 {clean_amount} {from_currency} = **{result:.2f} {to_currency}**")
     else:
         st.error("Conversion failed.")
-
