@@ -14,7 +14,7 @@ to_currency_options = [curr for curr in ['USD', 'UAH', 'RUB'] if curr != from_cu
 
 to_currency = st.selectbox("To currency", to_currency_options)
 
-amount = st.number_input(min_value=1, label="Enter amount", step=1)
+amount = st.number_input(min_value=None, label="Enter amount", step=1)
 if st.button("Check amount"):
     currency = Currency()
     result = currency.convert(to_curr=to_currency, from_curr=from_currency, amount=amount)
