@@ -2,7 +2,7 @@ import requests
 
 class Currency:
     def __init__(self):
-        self.api_key = "API-KEY"
+        self.api_key = "183746f5f8587ca8e2703602"
         self.supported_currencies = self.get_supported_currencies()
 
     def get_supported_currencies(self):
