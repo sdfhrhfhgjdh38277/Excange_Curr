@@ -1,5 +1,5 @@
 import requests
-
+import streamlit as st
 
 class Currency:
     def __init__(self):
