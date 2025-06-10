@@ -7,7 +7,7 @@ class Currency:
 
     def get_supported_currencies(self):
         url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/USD"
-         print("DEBUG: response from API: ", response)
+        print("DEBUG: response from API: ", response)
         response = requests.get(url).json()
         if response["result"] == "success":
             return list(response["conversion_rates"].keys())
