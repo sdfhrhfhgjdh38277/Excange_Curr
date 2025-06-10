@@ -6,14 +6,19 @@ class Currency:
         self.supported_currencies = self.get_supported_currencies()
 
     def get_supported_currencies(self):
-        url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/USD"
-        print("DEBUG: response from API: ", response)
+    url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/USD"
+    try:
         response = requests.get(url).json()
-        if response["result"] == "success":
+        print("DEBUG API response:", response)  # ← ВОТ ЭТО ГЛАВНОЕ
+        if response.get("result") == "success":
             return list(response["conversion_rates"].keys())
         else:
-            print("Failed to get supported currencies:", response)
+            print("API ERROR:", response.get("error-type", "unknown"))
             return []
+    except Exception as e:
+        print("Exception during API request:", e)
+        return []
+
 
     def convert(self, from_curr, to_curr, amount):
         if (
