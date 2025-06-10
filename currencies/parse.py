@@ -1,5 +1,4 @@
 import requests
-import streamlit as st
 
 class Currency:
     def __init__(self):
@@ -9,7 +8,7 @@ class Currency:
     def get_supported_currencies(self):
         url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/USD"
         response = requests.get(url).json()
-        st.error("DEBUG: response from API: ", response)
+        print("DEBUG: response from API: ", response)
         if response["result"] == "success":
             return list(response["conversion_rates"].keys())
         else:
