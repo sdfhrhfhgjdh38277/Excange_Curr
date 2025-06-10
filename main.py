@@ -12,7 +12,7 @@ st.markdown(
 )
 
 currency = Currency()
-supported = currency.supported_currencies
+supported = currency.get_supported_currencies
 
 from_currency = st.selectbox("From currency", supported)
 
