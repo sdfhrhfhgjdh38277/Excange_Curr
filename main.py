@@ -12,18 +12,30 @@ st.markdown(
 )
 
 currency = Currency()
-supported = currency.get_supported_currencies()
-st.write("Supported currencies:", supported) 
+supported = currency.supported_currencies
 
 from_currency = st.selectbox("From currency", supported)
 
 to_currency_options = [curr for curr in supported if curr != from_currency]
 to_currency = st.selectbox("To currency", to_currency_options)
 
-amount = st.number_input(label="Enter amount", step=0.01, max_value=float(1_000_000))
+
+if "amount" not in st.session_state:
+    st.session_state.amount = 0.0
+
+def normalize_amount():
+    st.session_state.amount = abs(st.session_state.amount)
+
+amount = st.number_input(
+    label="Enter amount",
+    step=0.01,
+    max_value=1_000_000.0,
+    key="amount",
+    on_change=normalize_amount,
+)
 
 if st.button("Check amount"):
-    clean_amount = abs(amount)
+    clean_amount = st.session_state.amount
     result = currency.convert(
         from_curr=from_currency, to_curr=to_currency, amount=clean_amount
     )
