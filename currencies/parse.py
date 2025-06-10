@@ -9,7 +9,6 @@ class Currency:
         url = f"https://v6.exchangerate-api.com/v6/{self.api_key}/latest/USD"
         try:
             response = requests.get(url).json()
-            print("DEBUG API response:", response)  # ← ВОТ ЭТО ГЛАВНОЕ
             if response.get("result") == "success":
                 return list(response["conversion_rates"].keys())
             else:
